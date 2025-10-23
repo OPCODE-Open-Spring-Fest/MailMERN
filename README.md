@@ -140,12 +140,44 @@ Then simply run:
 
 npm start
 
-## 🤖 Planned Features
+## 🤖 AI Chatbot Feature (COMPLETED!)
+
+The AI Auto Responder chatbot has been successfully implemented! 🎉
+
+### What's Included:
+- **OpenAI Integration**: Uses GPT-3.5-turbo for intelligent responses
+- **Smart Fallback**: Predefined responses when OpenAI is unavailable
+- **Message Categorization**: Automatically categorizes queries (greeting, pricing, support, features)
+- **Sentiment Analysis**: Analyzes user message sentiment
+- **Full Chat Interface**: Complete chat page at `/chatbot`
+- **Embeddable Widget**: Chat widget for any page
+- **Conversation History**: Stores and retrieves chat history
+- **Analytics**: Usage analytics and insights
+
+### How to Use:
+1. **Set up OpenAI API key** in your `.env` file:
+   ```env
+   OPENAI_API_KEY=your_openai_api_key_here
+   ```
+
+2. **Access the chatbot**:
+   - Visit `/chatbot` for the full chat interface
+   - Use the chat widget on the home page
+   - Navigate via the "AI Assistant" link in the navbar
+
+3. **API Endpoints**:
+   - `POST /api/chatbot/message` - Send messages
+   - `GET /api/chatbot/history/:userId` - Get chat history
+   - `GET /api/chatbot/analytics/:userId` - Get analytics
+
+For detailed documentation, see [CHATBOT_README.md](./CHATBOT_README.md)
+
+## 🚀 Planned Features
 
 | Feature | Description | Status |
 |----------|-------------|--------|
 | 📧 Mass Email Sending | Send personalized bulk emails | ✅ Base setup |
-| 🧠 AI Auto Responder | AI chatbot replies to received emails | 🧩 Planned |
+| 🧠 AI Auto Responder | AI chatbot replies to received emails | ✅ **COMPLETED** |
 | 📅 Scheduler | Schedule campaigns for future dates | 🧩 Planned |
 | 📊 Dashboard | Track sent, opened, and clicked emails | 🧩 Planned |
 | 📂 Contact Management | Upload and manage email lists | 🧩 Planned |
