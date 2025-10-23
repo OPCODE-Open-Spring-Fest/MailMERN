@@ -115,7 +115,7 @@ const topCampaigns = [
     id: "tc-001",
     name: "Q4 Product Launch",
     responseRate: "45.2%",
-    icon: <Send className="w-5 h-5 text-indigo-500" />,
+    icon: <Send className="w-5 h-5 text-indigo-600" />,
   },
   {
     id: "tc-002",
