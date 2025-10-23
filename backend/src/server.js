@@ -5,6 +5,7 @@ const cors = require('cors');
 const connectDB = require('./config/db');
 const userRoutes = require('./routes/userRoutes');
 const chatbotRoutes = require('./routes/chatbotRoutes');
+const emailRoutes = require('./routes/emailRoutes');
 
 const app = express();
 app.use(cors());
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use('/api/users', userRoutes);
 app.use('/api/chatbot', chatbotRoutes);
 app.use('/api/auth', userRoutes);
+app.use('/api/emails', emailRoutes);
 
 const PORT = process.env.PORT || 5000;
 
