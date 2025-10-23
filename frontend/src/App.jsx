@@ -1,5 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Toaster } from "react-hot-toast"; 
+
+// Your Components
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -16,7 +19,7 @@ export default function App() {
         <div className="app-container">
           <Navbar />
 
-          {/* Define routes for all pages */}
+          
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/dashboard" element={<Dashboard />} />
@@ -26,6 +29,25 @@ export default function App() {
           </Routes>
 
           <Footer />
+          
+          
+          <Toaster 
+            position="top-right" 
+            toastOptions={{
+              success: {
+                style: {
+                  background: '#333',
+                  color: '#fff',
+                },
+              },
+              error: {
+                style: {
+                  background: '#333',
+                  color: '#fff',
+                },
+              },
+            }}
+          />
         </div>
       </Router>
     </AuthProvider>
