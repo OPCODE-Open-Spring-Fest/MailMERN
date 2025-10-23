@@ -1,4 +1,7 @@
 # 💌 MERN Mass Email Sender & AI Auto-Responder
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 A full-stack **MERN Starter Project** for creating an **open-source email marketing platform** — similar to **AWeber** or **Mailchimp** — that can:
 - 📩 Send **mass emails** to large groups efficiently  
@@ -266,3 +269,26 @@ If you like this project:
 🚀 Contribute by raising PRs
 
 Together, let’s build an open-source AI-powered mass email platform!
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/SUJALGOYALL"><img src="https://avatars.githubusercontent.com/u/149406142?v=4?s=100" width="100px;" alt="sujalgoyall"/><br /><sub><b>sujalgoyall</b></sub></a><br /><a href="https://github.com/OPCODE-Open-Spring-Fest/MailMERN/commits?author=SUJALGOYALL" title="Code">💻</a> <a href="https://github.com/OPCODE-Open-Spring-Fest/MailMERN/commits?author=SUJALGOYALL" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Shreyanshi210205"><img src="https://avatars.githubusercontent.com/u/163715359?v=4?s=100" width="100px;" alt="Shreyanshi210205"/><br /><sub><b>Shreyanshi210205</b></sub></a><br /><a href="https://github.com/OPCODE-Open-Spring-Fest/MailMERN/commits?author=Shreyanshi210205" title="Code">💻</a> <a href="https://github.com/OPCODE-Open-Spring-Fest/MailMERN/commits?author=Shreyanshi210205" title="Documentation">📖</a> <a href="#infra-Shreyanshi210205" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/MD-IRFAN-RAJ"><img src="https://avatars.githubusercontent.com/u/140601987?v=4?s=100" width="100px;" alt="MD IRFAN RAJ"/><br /><sub><b>MD IRFAN RAJ</b></sub></a><br /><a href="https://github.com/OPCODE-Open-Spring-Fest/MailMERN/commits?author=MD-IRFAN-RAJ" title="Code">💻</a> <a href="https://github.com/OPCODE-Open-Spring-Fest/MailMERN/commits?author=MD-IRFAN-RAJ" title="Documentation">📖</a> <a href="#infra-MD-IRFAN-RAJ" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!

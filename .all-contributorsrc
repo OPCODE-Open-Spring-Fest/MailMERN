@@ -1,0 +1,49 @@
+{
+  "projectName": "MailMERN",
+  "projectOwner": "OPCODE-Open-Spring-Fest",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "SUJALGOYALL",
+      "name": "sujalgoyall",
+      "avatar_url": "https://avatars.githubusercontent.com/u/149406142?v=4",
+      "profile": "https://github.com/SUJALGOYALL",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "Shreyanshi210205",
+      "name": "Shreyanshi210205",
+      "avatar_url": "https://avatars.githubusercontent.com/u/163715359?v=4",
+      "profile": "https://github.com/Shreyanshi210205",
+      "contributions": [
+        "code",
+        "doc",
+        "infra"
+      ]
+    },
+    {
+      "login": "MD-IRFAN-RAJ",
+      "name": "MD IRFAN RAJ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/140601987?v=4",
+      "profile": "https://github.com/MD-IRFAN-RAJ",
+      "contributions": [
+        "code",
+        "doc",
+        "infra"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "linkToUsage": false,
+  "commitType": "docs"
+}
