@@ -30,6 +30,17 @@
         "doc",
         "infra"
       ]
+    },
+    {
+      "login": "MD-IRFAN-RAJ",
+      "name": "MD IRFAN RAJ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/140601987?v=4",
+      "profile": "https://github.com/MD-IRFAN-RAJ",
+      "contributions": [
+        "code",
+        "doc",
+        "infra"
+      ]
     }
   ],
   "contributorsPerLine": 7,
