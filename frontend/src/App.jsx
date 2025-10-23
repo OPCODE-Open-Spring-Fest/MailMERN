@@ -8,7 +8,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
 import { AuthProvider } from "./context/AuthContext";
-
+import ForgotPassword from "./pages/Forgotpassword";
+export const serverUrl="http://localhost:8000"
 export default function App() {
   return (
     <AuthProvider>
@@ -22,6 +23,7 @@ export default function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path='/forgot-password' element={<ForgotPassword/>}/>
             <Route path="*" element={<NotFound />} />
           </Routes>
 
