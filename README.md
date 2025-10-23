@@ -1,6 +1,6 @@
 # 💌 MERN Mass Email Sender & AI Auto-Responder
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 A full-stack **MERN Starter Project** for creating an **open-source email marketing platform** — similar to **AWeber** or **Mailchimp** — that can:
@@ -143,12 +143,44 @@ Then simply run:
 
 npm start
 
-## 🤖 Planned Features
+## 🤖 AI Chatbot Feature (COMPLETED!)
+
+The AI Auto Responder chatbot has been successfully implemented! 🎉
+
+### What's Included:
+- **OpenAI Integration**: Uses GPT-3.5-turbo for intelligent responses
+- **Smart Fallback**: Predefined responses when OpenAI is unavailable
+- **Message Categorization**: Automatically categorizes queries (greeting, pricing, support, features)
+- **Sentiment Analysis**: Analyzes user message sentiment
+- **Full Chat Interface**: Complete chat page at `/chatbot`
+- **Embeddable Widget**: Chat widget for any page
+- **Conversation History**: Stores and retrieves chat history
+- **Analytics**: Usage analytics and insights
+
+### How to Use:
+1. **Set up OpenAI API key** in your `.env` file:
+   ```env
+   OPENAI_API_KEY=your_openai_api_key_here
+   ```
+
+2. **Access the chatbot**:
+   - Visit `/chatbot` for the full chat interface
+   - Use the chat widget on the home page
+   - Navigate via the "AI Assistant" link in the navbar
+
+3. **API Endpoints**:
+   - `POST /api/chatbot/message` - Send messages
+   - `GET /api/chatbot/history/:userId` - Get chat history
+   - `GET /api/chatbot/analytics/:userId` - Get analytics
+
+For detailed documentation, see [CHATBOT_README.md](./CHATBOT_README.md)
+
+## 🚀 Planned Features
 
 | Feature | Description | Status |
 |----------|-------------|--------|
 | 📧 Mass Email Sending | Send personalized bulk emails | ✅ Base setup |
-| 🧠 AI Auto Responder | AI chatbot replies to received emails | 🧩 Planned |
+| 🧠 AI Auto Responder | AI chatbot replies to received emails | ✅ **COMPLETED** |
 | 📅 Scheduler | Schedule campaigns for future dates | 🧩 Planned |
 | 📊 Dashboard | Track sent, opened, and clicked emails | 🧩 Planned |
 | 📂 Contact Management | Upload and manage email lists | 🧩 Planned |
@@ -248,6 +280,8 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tbody>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/SUJALGOYALL"><img src="https://avatars.githubusercontent.com/u/149406142?v=4?s=100" width="100px;" alt="sujalgoyall"/><br /><sub><b>sujalgoyall</b></sub></a><br /><a href="https://github.com/OPCODE-Open-Spring-Fest/MailMERN/commits?author=SUJALGOYALL" title="Code">💻</a> <a href="https://github.com/OPCODE-Open-Spring-Fest/MailMERN/commits?author=SUJALGOYALL" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Shreyanshi210205"><img src="https://avatars.githubusercontent.com/u/163715359?v=4?s=100" width="100px;" alt="Shreyanshi210205"/><br /><sub><b>Shreyanshi210205</b></sub></a><br /><a href="https://github.com/OPCODE-Open-Spring-Fest/MailMERN/commits?author=Shreyanshi210205" title="Code">💻</a> <a href="https://github.com/OPCODE-Open-Spring-Fest/MailMERN/commits?author=Shreyanshi210205" title="Documentation">📖</a> <a href="#infra-Shreyanshi210205" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/MD-IRFAN-RAJ"><img src="https://avatars.githubusercontent.com/u/140601987?v=4?s=100" width="100px;" alt="MD IRFAN RAJ"/><br /><sub><b>MD IRFAN RAJ</b></sub></a><br /><a href="https://github.com/OPCODE-Open-Spring-Fest/MailMERN/commits?author=MD-IRFAN-RAJ" title="Code">💻</a> <a href="https://github.com/OPCODE-Open-Spring-Fest/MailMERN/commits?author=MD-IRFAN-RAJ" title="Documentation">📖</a> <a href="#infra-MD-IRFAN-RAJ" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
     </tr>
   </tbody>
 </table>
