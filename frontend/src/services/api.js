@@ -19,6 +19,7 @@ const fetchJson = async (url, options = {}) => {
   }
 };
 
+// User API calls
 export const loginUser = async (credentials) =>
   fetchJson(`${API_URL}/users/login`, {
     method: 'POST',
@@ -48,3 +49,11 @@ export const getMetrics = async () => {
     };
   }
 };
+  axios.post(`${API_URL}/users/register`, userData);
+
+// Chatbot API calls
+export const sendChatbotMessage = async (message, userId) =>
+  axios.post(`${API_URL}/chatbot/message`, { message, userId });
+
+export const testChatbot = async (message) =>
+  axios.post(`${API_URL}/chatbot/test`, { message });
