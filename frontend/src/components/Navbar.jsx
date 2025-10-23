@@ -39,7 +39,7 @@ export default function Navbar() {
               to={link.path}
               className={`text-sm font-medium transition-all duration-200 ${
                 location.pathname === link.path
-                  ? "text-slate-900 border-b-2 border-slate-800 pb-1"
+                  ? "text-slate-900 border-b-2 border-slate-700 pb-1"
                   : "text-slate-600 hover:text-slate-900"
               }`}
             >
