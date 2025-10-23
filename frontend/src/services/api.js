@@ -1,12 +1,50 @@
 // All backend API calls will be handled here
 // For now, placeholders to help contributors start easily
 
-import axios from "axios";
-
 const API_URL = "http://localhost:5000/api";
 
+// Helper wrapper around fetch to return parsed json and throw on bad status
+const fetchJson = async (url, options = {}) => {
+  const res = await fetch(url, options);
+  const text = await res.text();
+  try {
+    const data = text ? JSON.parse(text) : {};
+    if (!res.ok) throw new Error(data?.message || res.statusText || 'Request failed');
+    return data;
+  } catch (err) {
+    // If JSON parse fails, throw an error with raw text
+    if (!res.ok) throw new Error(text || res.statusText || 'Request failed');
+    // parse succeeded previously but JSON parse error — rethrow
+    throw err;
+  }
+};
+
 export const loginUser = async (credentials) =>
-  axios.post(`${API_URL}/users/login`, credentials);
+  fetchJson(`${API_URL}/users/login`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(credentials),
+  });
 
 export const registerUser = async (userData) =>
-  axios.post(`${API_URL}/users/register`, userData);
+  fetchJson(`${API_URL}/users/register`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(userData),
+  });
+
+// Fetch dashboard metrics from backend; if backend unavailable return dummy data
+export const getMetrics = async () => {
+  try {
+    const data = await fetchJson(`${API_URL}/metrics`);
+    // expected shape: { totalSent, responseRate, pendingReplies }
+    return data;
+  } catch (err) {
+    // fallback dummy values for local/dev
+    return {
+      totalSent: 1245,
+      responseRate: 32.5, // percent
+      pendingReplies: 87,
+    };
+  }
+};
