@@ -6,9 +6,9 @@ const {
 } = require('../controllers/chatbotController');
 
 // POST /api/chatbot/message - Send a message to the chatbot
-router.post('/message', sendMessage);
+router.post('/message', asyncHandler(sendMessage));
 
 // POST /api/chatbot/test - Test chatbot functionality (development endpoint)
-router.post('/test', testChatbot);
+router.post('/test', asyncHandler(testChatbot));
 
 module.exports = router;
