@@ -1,6 +1,6 @@
 # 💌 MERN Mass Email Sender & AI Auto-Responder
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 A full-stack **MERN Starter Project** for creating an **open-source email marketing platform** — similar to **AWeber** or **Mailchimp** — that can:
@@ -285,6 +285,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/tusharpatel0504"><img src="https://avatars.githubusercontent.com/u/170926688?v=4?s=100" width="100px;" alt="Tushar Patel"/><br /><sub><b>Tushar Patel</b></sub></a><br /><a href="https://github.com/OPCODE-Open-Spring-Fest/MailMERN/commits?author=tusharpatel0504" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Satvik-Singh192"><img src="https://avatars.githubusercontent.com/u/174111881?v=4?s=100" width="100px;" alt="Satvik Singh"/><br /><sub><b>Satvik Singh</b></sub></a><br /><a href="https://github.com/OPCODE-Open-Spring-Fest/MailMERN/commits?author=Satvik-Singh192" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/snehasingh022"><img src="https://avatars.githubusercontent.com/u/163733227?v=4?s=100" width="100px;" alt="Sneha Singh"/><br /><sub><b>Sneha Singh</b></sub></a><br /><a href="https://github.com/OPCODE-Open-Spring-Fest/MailMERN/commits?author=snehasingh022" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/SHIVA00202"><img src="https://avatars.githubusercontent.com/u/205666390?v=4?s=100" width="100px;" alt="SHIVA00202"/><br /><sub><b>SHIVA00202</b></sub></a><br /><a href="https://github.com/OPCODE-Open-Spring-Fest/MailMERN/commits?author=SHIVA00202" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
