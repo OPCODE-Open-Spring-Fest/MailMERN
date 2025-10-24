@@ -12,6 +12,7 @@ import Register from "./pages/Register";
 import Chatbot from "./pages/Chatbot";
 import NotFound from "./pages/NotFound";
 import { AuthProvider } from "./context/AuthContext";
+import ForgotPassword from "./pages/Forgotpassword";
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
             <Route path="/chatbot" element={<Chatbot />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path='/forgot-password' element={<ForgotPassword/>}/>
             <Route path="*" element={<NotFound />} />
           </Routes>
 

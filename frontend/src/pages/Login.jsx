@@ -1,83 +1,107 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; 
-import { toast } from "react-hot-toast";
-import axios from "axios";                     
-import { useAuth } from "../context/AuthContext"; 
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
+import { loginUser } from "../services/authService";
 
-export default function Login() {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false); 
-
-  const { login } = useAuth();
-  const navigate = useNavigate(); 
+  const [showPassword, setShowPassword] = useState(false);
+  const [err, setErr] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setErr("");
     setLoading(true);
-    const loadingToast = toast.loading("Logging in..."); 
-
     try {
-      
-      const { data } = await axios.post(
-        "/api/v1/user/login", 
-        { email, password },
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true, 
-        }
-      );
-
-      
-      toast.dismiss(loadingToast); 
-      
-      if (data.success) {
-        toast.success(data.message || "Logged in successfully!");
-        login(data.user); 
-        navigate("/dashboard"); 
-      } else {
-        
-        toast.error(data.message || "Login failed. Please try again.");
-      }
-
+      const result = await loginUser({ email, password });
+      console.log(result.data);
+      setLoading(false);
+      navigate("/"); // Redirect on success
     } catch (error) {
-      
-      console.error("Login error:", error);
-      toast.dismiss(loadingToast); // Dismiss loading toast
-      
-
-      const errorMessage =
-        error.response?.data?.message || "Login failed. Please check your credentials.";
-      toast.error(errorMessage);
-
-    } finally {
-      setLoading(false); 
+      setErr(error?.response?.data?.message || error.message || "Login failed.");
+      setLoading(false);
     }
   };
 
   return (
-    <div className="page login">
-      <h1>Login</h1>
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-       
-        <button type="submit" disabled={loading}>
-          {loading ? "Logging in..." : "Login"}
-        </button>
-      </form>
+    <div className="min-h-screen flex items-center justify-center bg-gray-900 p-6">
+      <div className="bg-gray-800 rounded-2xl shadow-2xl w-full max-w-md p-10 border border-gray-700">
+        <h1 className="text-4xl font-extrabold mb-4 text-cyan-400 text-center">MailMERN</h1>
+        <p className="text-gray-400 mb-8 text-center">Sign in to your account</p>
+
+        <form onSubmit={handleLogin} className="space-y-6">
+          <div>
+            <label htmlFor="email" className="block mb-2 font-medium text-gray-300">Email</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="Enter your Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="w-full px-4 py-3 rounded-xl border border-gray-700 bg-gray-900 text-gray-100 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="password" className="block mb-2 font-medium text-gray-300">Password</label>
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                id="password"
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="w-full px-4 py-3 rounded-xl border border-gray-700 bg-gray-900 text-gray-100 focus:outline-none focus:ring-2 focus:ring-cyan-400 pr-12 transition"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(prev => !prev)}
+                className="absolute right-3 top-3 text-gray-400 hover:text-cyan-400 transition"
+              >
+                {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+              </button>
+            </div>
+          </div>
+
+          <div className="text-right">
+            <button
+              type="button"
+              onClick={() => navigate("/forgot-password")}
+              className="text-cyan-400 font-medium hover:underline transition"
+            >
+              Forgot Password?
+            </button>
+          </div>
+
+          {err && <p className="text-red-500 text-center">{err}</p>}
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-bold py-3 rounded-full shadow-lg hover:scale-105 transition-transform duration-300"
+          >
+            {loading ? <ClipLoader size={20} color="white" /> : "Sign In"}
+          </button>
+        </form>
+
+        <p className="mt-6 text-center text-gray-300">
+          Don't have an account?{" "}
+          <span
+            onClick={() => navigate("/register")}
+            className="text-cyan-400 font-semibold cursor-pointer hover:underline"
+          >
+            Sign Up
+          </span>
+        </p>
+      </div>
     </div>
   );
-}
+};
+
+export default Login;
