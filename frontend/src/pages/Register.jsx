@@ -1,11 +1,51 @@
 import React, { useState } from "react";
+import { toast } from "react-hot-toast";       
+import { useNavigate } from "react-router-dom"; 
+import axios from "axios";                     
 
 export default function Register() {
   const [user, setUser] = useState({ name: "", email: "", password: "" });
+  const [loading, setLoading] = useState(false); 
+  const navigate = useNavigate(); 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => { 
     e.preventDefault();
-    console.log("New user:", user);
+    setLoading(true);
+    const loadingToast = toast.loading("Registering..."); 
+
+    try {
+      // 7. Make API call
+      const { data } = await axios.post(
+        "/api/v1/user/register",
+        user, 
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
+      
+      toast.dismiss(loadingToast); 
+      
+      if (data.success) {
+        toast.success(data.message || "Registration successful! Please login.");
+        navigate("/login"); 
+      } else {
+        toast.error(data.message || "Registration failed. Please try again.");
+      }
+
+    } catch (error) {
+      
+      console.error("Registration error:", error);
+      toast.dismiss(loadingToast); 
+      
+     
+      const errorMessage =
+        error.response?.data?.message || "Registration failed. Please try again.";
+      toast.error(errorMessage);
+
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -33,7 +73,10 @@ export default function Register() {
           onChange={(e) => setUser({ ...user, password: e.target.value })}
           required
         />
-        <button type="submit">Register</button>
+        {}
+        <button type="submit" disabled={loading}>
+          {loading ? "Registering..." : "Register"}
+        </button>
       </form>
     </div>
   );
