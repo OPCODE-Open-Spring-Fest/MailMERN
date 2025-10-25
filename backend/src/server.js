@@ -4,6 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/db');
 const userRoutes = require('./routes/userRoutes');
+const { errorMiddleware } = require('./middlewares/errorMiddleware');
 const chatbotRoutes = require('./routes/chatbotRoutes');
 
 const app = express();
@@ -16,6 +17,10 @@ app.use('/api/auth', userRoutes);
 
 const PORT = process.env.PORT || 5000;
 
+app.use('*', (req, res) => {
+  res.status(404).json({ success: false, message: 'Route not found' });
+});
+
 const start = async () => {
   try {
     await connectDB();
@@ -26,5 +31,5 @@ const start = async () => {
 };
 
 start();
-
+app.use(errorMiddleware);
 module.exports = app;
