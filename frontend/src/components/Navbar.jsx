@@ -13,9 +13,11 @@ export default function Navbar() {
     { name: "Chatbot", path: "/chatbot" },
     { name: "Login", path: "/login" },
     { name: "Register", path: "/register" },
+    { name:"Email Builder", path:"/builder"}
   ];
 
   return (
+ 
     <motion.nav
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
@@ -55,6 +57,7 @@ export default function Navbar() {
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
+ 
       </div>
 
       {/* Mobile Dropdown */}

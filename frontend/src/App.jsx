@@ -18,6 +18,7 @@ import Register from "./pages/Register";
 import Chatbot from "./pages/Chatbot";
 import ForgotPassword from "./pages/Forgotpassword";
 import NotFound from "./pages/NotFound";
+import TemplateBuilder from "./pages/Campaign";
 import { AuthProvider } from "./context/AuthContext";
 
 // Layout controller — hides Navbar/Footer on 404 page
@@ -67,6 +68,42 @@ export default function App() {
     <AuthProvider>
       <Router>
         <AppContent />
+        <div className="app-container">
+          <Navbar />
+
+          
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/chatbot" element={<Chatbot />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/builder" element={<TemplateBuilder />} /> 
+            <Route path='/forgot-password' element={<ForgotPassword/>}/>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+
+          <Footer />
+          
+          
+          <Toaster 
+            position="top-right" 
+            toastOptions={{
+              success: {
+                style: {
+                  background: '#333',
+                  color: '#fff',
+                },
+              },
+              error: {
+                style: {
+                  background: '#333',
+                  color: '#fff',
+                },
+              },
+            }}
+          />
+        </div>
       </Router>
     </AuthProvider>
   );
