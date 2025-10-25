@@ -41,6 +41,42 @@
         "doc",
         "infra"
       ]
+    },
+    {
+      "login": "tusharpatel0504",
+      "name": "Tushar Patel",
+      "avatar_url": "https://avatars.githubusercontent.com/u/170926688?v=4",
+      "profile": "https://github.com/tusharpatel0504",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Satvik-Singh192",
+      "name": "Satvik Singh",
+      "avatar_url": "https://avatars.githubusercontent.com/u/174111881?v=4",
+      "profile": "https://github.com/Satvik-Singh192",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "snehasingh022",
+      "name": "Sneha Singh",
+      "avatar_url": "https://avatars.githubusercontent.com/u/163733227?v=4",
+      "profile": "https://github.com/snehasingh022",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "SHIVA00202",
+      "name": "SHIVA00202",
+      "avatar_url": "https://avatars.githubusercontent.com/u/205666390?v=4",
+      "profile": "https://github.com/SHIVA00202",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
