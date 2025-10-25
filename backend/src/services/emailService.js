@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
+const EmailLog = require('../models/EmailLog'); // import model
 
 const sendEmail = async ({ to, subject, text, html }) => {
-  // This uses ethereal by default for local testing
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST || 'smtp.ethereal.email',
     port: process.env.SMTP_PORT || 587,
@@ -12,15 +12,37 @@ const sendEmail = async ({ to, subject, text, html }) => {
     },
   });
 
-  const info = await transporter.sendMail({
-    from: process.env.EMAIL_FROM || 'no-reply@mailmern.local',
-    to,
-    subject,
-    text,
-    html,
-  });
+  try {
+    // Sending mail
+    const info = await transporter.sendMail({
+      from: process.env.EMAIL_FROM || 'no-reply@mailmern.local',
+      to,
+      subject,
+      text,
+      html,
+    });
 
-  return info;
+    // success
+    await EmailLog.create({
+      to,
+      subject,
+      status: 'sent',
+      timestamp: new Date(),
+    });
+
+    return info;
+  } catch (error) {
+    // failure
+    await EmailLog.create({
+      to,
+      subject,
+      status: 'failed',
+      timestamp: new Date(),
+    });
+
+    console.error('Email sending failed:', error);
+    throw error;
+  }
 };
 
 module.exports = { sendEmail };
