@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Chatbot from "./pages/Chatbot";
 import NotFound from "./pages/NotFound";
+import TemplateBuilder from "./pages/Campaign";
 import { AuthProvider } from "./context/AuthContext";
 import ForgotPassword from "./pages/Forgotpassword";
 
@@ -28,6 +29,7 @@ export default function App() {
             <Route path="/chatbot" element={<Chatbot />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/builder" element={<TemplateBuilder />} /> 
             <Route path='/forgot-password' element={<ForgotPassword/>}/>
             <Route path="*" element={<NotFound />} />
           </Routes>
