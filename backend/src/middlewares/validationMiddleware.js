@@ -66,11 +66,9 @@ const chatbotSendMessageSchema = z.object({
  
 const validateRequest = (schema) => {
   return (req, res, next) => {
-    try {
-       
+    try {       
     
-      const validatedData = schema.parse(req.body);
-     
+      const validatedData = schema.parse(req.body);   
       
    
       req.body = validatedData;
@@ -101,14 +99,29 @@ const validateRequest = (schema) => {
     }
   };
 };
+const loginValidationSchema = z.object({
+  email: z.string()
+    .email('Invalid email format')
+    .min(1, 'Email is required')
+    .max(100, 'Email must be less than 100 characters')
+    .trim()
+    .toLowerCase(),
+    
+  password: z.string()
+    .min(6, 'Password must be at least 6 characters')
+    .max(100, 'Password must be less than 100 characters')
+});
+
 
  
 const validateUser = validateRequest(userValidationSchema);
 const validateMessage = validateRequest(messageValidationSchema);
 const validateChatbotMessage = validateRequest(chatbotMessageSchema);
 const validateChatbotSendMessage = validateRequest(chatbotSendMessageSchema);
+const validateLogin = validateRequest(loginValidationSchema);
 
 module.exports = {
+  validateLogin,
   validateUser,
   validateMessage,
   validateChatbotMessage,

@@ -1,26 +1,24 @@
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
 
-const sendEmail = async ({ to, subject, text, html }) => {
-  // This uses ethereal by default for local testing
+exports.sendEmail = async ({ to, otp }) => {
+  if (!to) throw new Error("Recipient email is required");
+
   const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST || 'smtp.ethereal.email',
-    port: process.env.SMTP_PORT || 587,
-    secure: false,
+    host: process.env.SMTP_HOST || "smtp.gmail.com",
+    port: process.env.SMTP_PORT || 465,
+    secure: true, // must be true for port 465
     auth: {
-      user: process.env.SMTP_USER || '',
-      pass: process.env.SMTP_PASS || '',
+      user: process.env.EMAIL,
+      pass: process.env.PASS,
     },
   });
 
   const info = await transporter.sendMail({
-    from: process.env.EMAIL_FROM || 'no-reply@mailmern.local',
+    from: process.env.EMAIL,
     to,
-    subject,
-    text,
-    html,
+    subject: "Reset Your Password",
+    html: `<p>Your OTP is <b>${otp}</b>. It expires in 5 minutes.</p>`,
   });
 
   return info;
 };
-
-module.exports = { sendEmail };
