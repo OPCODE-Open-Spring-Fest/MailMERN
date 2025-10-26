@@ -81,7 +81,7 @@ const Register = () => {
               <button
                 type="button"
                 onClick={() => setShowPassword(prev => !prev)}
-                className="absolute right-3 top-3 text-gray-400 hover:text-cyan-400 transition"
+                className="absolute right-3 top-4 text-gray-400 hover:text-cyan-400 transition"
               >
                 {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
               </button>
