@@ -1,6 +1,6 @@
 # 💌 MERN Mass Email Sender & AI Auto-Responder
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 A full-stack **MERN Starter Project** for creating an **open-source email marketing platform** — similar to **AWeber** or **Mailchimp** — that can:
@@ -290,6 +290,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/abhijit1859"><img src="https://avatars.githubusercontent.com/u/172739183?v=4?s=100" width="100px;" alt="Abhijit Kumar"/><br /><sub><b>Abhijit Kumar</b></sub></a><br /><a href="https://github.com/OPCODE-Open-Spring-Fest/MailMERN/commits?author=abhijit1859" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/nitingupta95"><img src="https://avatars.githubusercontent.com/u/153295329?v=4?s=100" width="100px;" alt="Nitin Gupta"/><br /><sub><b>Nitin Gupta</b></sub></a><br /><a href="https://github.com/OPCODE-Open-Spring-Fest/MailMERN/commits?author=nitingupta95" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/KoushalGH"><img src="https://avatars.githubusercontent.com/u/204740464?v=4?s=100" width="100px;" alt="Koushal G H"/><br /><sub><b>Koushal G H</b></sub></a><br /><a href="https://github.com/OPCODE-Open-Spring-Fest/MailMERN/commits?author=KoushalGH" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
