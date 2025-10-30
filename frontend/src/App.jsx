@@ -14,6 +14,7 @@ import NotFound from "./pages/NotFound";
 import TemplateBuilder from "./pages/Campaign";
 import { AuthProvider } from "./context/AuthContext";
 import ForgotPassword from "./pages/Forgotpassword";
+import Contacts from "./pages/Contact";
 
 export default function App() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/builder" element={<TemplateBuilder />} /> 
             <Route path='/forgot-password' element={<ForgotPassword/>}/>
+            <Route path='/contacts' element={<Contacts/>}/>
             <Route path="*" element={<NotFound />} />
           </Routes>
 

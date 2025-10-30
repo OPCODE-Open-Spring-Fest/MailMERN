@@ -64,7 +64,7 @@ import axios from "axios";
 
 // ======================= AXIOS INSTANCE =======================
 const api = axios.create({
-  baseURL: "http://localhost:8000/api",
+  baseURL: "http://localhost:5000/api",
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
@@ -83,7 +83,7 @@ export default api;
 
 
 // ======================= FETCH BASED APIs =======================
-const API_URL = "http://localhost:8000/api";
+const API_URL = "http://localhost:5000/api";
 
 // Reusable fetch helper
 const fetchJson = async (url, options = {}) => {

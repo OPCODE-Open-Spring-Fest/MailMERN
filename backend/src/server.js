@@ -7,7 +7,7 @@ const userRoutes = require('./routes/userRoutes');
 const { errorMiddleware } = require('./middlewares/errorMiddleware');
 const chatbotRoutes = require('./routes/chatbotRoutes');
 const emailRoutes = require('./routes/emailRoutes');
-
+const contactRoutes = require('./routes/contactRoutes');
 const app = express();
 app.use(
   cors({
@@ -22,6 +22,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/chatbot', chatbotRoutes);
 app.use('/api/auth', userRoutes);
 app.use('/api/emails', emailRoutes);
+app.use('/api/contacts',contactRoutes);
 
 const PORT = process.env.PORT || 5000;
 
