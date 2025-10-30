@@ -13,7 +13,8 @@ export default function Navbar() {
     { name: "Chatbot", path: "/chatbot" },
     { name: "Login", path: "/login" },
     { name: "Register", path: "/register" },
-    { name:"Email Builder", path:"/builder"}
+    { name:"Email Builder", path:"/builder"},
+    {name:"Contacts", path:"/contacts"}
   ];
 
   return (

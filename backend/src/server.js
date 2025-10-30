@@ -8,6 +8,7 @@ const chatbotRoutes = require('./routes/chatbotRoutes');
 const emailRoutes = require('./routes/emailRoutes');
 const trackRoutes = require('./routes/trackRoutes');
 const { configDotenv } = require('dotenv');
+const contactRoutes = require('./routes/contactRoutes');
 const app = express();
 app.use(
   cors({
@@ -23,6 +24,7 @@ app.use('/api/chatbot', chatbotRoutes);
 app.use('/api/auth', userRoutes);
 app.use('/api/emails', emailRoutes);
 app.use('/api/track', trackRoutes);
+app.use('/api/contacts',contactRoutes);
 
 const PORT = process.env.PORT || 5000;
 
