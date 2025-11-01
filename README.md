@@ -1,6 +1,6 @@
 # 💌 MERN Mass Email Sender & AI Auto-Responder
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-13-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-14-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 A full-stack **MERN Starter Project** for creating an **open-source email marketing platform** — similar to **AWeber** or **Mailchimp** — that can:
@@ -294,6 +294,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://indra-sutharrr07.onrender.com"><img src="https://avatars.githubusercontent.com/u/182353910?v=4?s=100" width="100px;" alt="Indrasuthar07"/><br /><sub><b>Indrasuthar07</b></sub></a><br /><a href="https://github.com/OPCODE-Open-Spring-Fest/MailMERN/commits?author=indrasuthar07" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Saitama9"><img src="https://avatars.githubusercontent.com/u/75604175?v=4?s=100" width="100px;" alt="Abhijit"/><br /><sub><b>Abhijit</b></sub></a><br /><a href="https://github.com/OPCODE-Open-Spring-Fest/MailMERN/commits?author=Saitama9" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://kunjmaheshwariportfoliowesbite.vercel.app/"><img src="https://avatars.githubusercontent.com/u/93459418?v=4?s=100" width="100px;" alt="Kunj Maheshwari"/><br /><sub><b>Kunj Maheshwari</b></sub></a><br /><a href="https://github.com/OPCODE-Open-Spring-Fest/MailMERN/commits?author=KunjMaheshwari" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/ADARSHsri2004"><img src="https://avatars.githubusercontent.com/u/148636737?v=4?s=100" width="100px;" alt="ADARSH SRIVASTAVA"/><br /><sub><b>ADARSH SRIVASTAVA</b></sub></a><br /><a href="https://github.com/OPCODE-Open-Spring-Fest/MailMERN/commits?author=ADARSHsri2004" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
