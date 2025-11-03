@@ -11,6 +11,13 @@ export default function ChatbotWidget() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const detectMeetingIntent = (text) => {
+    const t = text.toLowerCase();
+    // Match phrases like "schedule a meeting", "book meeting", "set meeting", etc.
+    return /(schedule|book|set|create).*(meeting|call|appointment)/i.test(t);
+  };
+
+
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
@@ -28,6 +35,36 @@ export default function ChatbotWidget() {
     }
   }, [isOpen]);
 
+
+  const scheduleMeeting = async (meetingData) => {
+    try {
+      const res = await fetch("http://localhost:5001/api/google-calendar/schedule", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(meetingData),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        return `✅ Meeting scheduled successfully! [View on Google Calendar](${data.eventLink})`;
+      } else {
+        throw new Error(data.message || "Failed to schedule meeting");
+      }
+    } catch (err) {
+      console.error("Google Calendar not connected, using mock scheduler.");
+      // fallback mock scheduler
+      const res = await fetch("http://localhost:5001/api/meetings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(meetingData),
+      });
+      const data = await res.json();
+      return data.success
+        ? `📅 Meeting added to internal scheduler for ${meetingData.date} at ${meetingData.time}.`
+        : "❌ Failed to schedule meeting.";
+    }
+  };
+
   const sendMessage = async () => {
     if (!inputMessage.trim()) return;
 
@@ -43,7 +80,24 @@ export default function ChatbotWidget() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:5000/api/chatbot/message', {
+      if (detectMeetingIntent(inputMessage)) {
+        const meetingData = {
+          title: "Chatbot Meeting",
+          date: new Date().toISOString().split("T")[0],
+          time: inputMessage.match(/(\d{1,2})(:\d{2})?\s?(am|pm)?/)?.[0] || "10:00 AM",
+          duration: 30,
+          userId: "widget-user",
+        };
+
+        const confirmation = await scheduleMeeting(meetingData);
+        const botMessage = { id: Date.now() + 1, message: confirmation, timestamp: new Date(), isBot: true };
+        setMessages((prev) => [...prev, botMessage]);
+        setIsLoading(false);
+        return;
+      }
+
+      // fallback: normal chatbot message
+      const response = await fetch('http://localhost:5001/api/chatbot/message', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -59,9 +113,7 @@ export default function ChatbotWidget() {
       if (data.success) {
         const botMessage = {
           id: Date.now() + 1,
-          message: data.data.response,
-          timestamp: new Date(data.data.timestamp),
-          isBot: true
+          message: data.data.response, timestamp: new Date(data.data.timestamp), isBot: true
         };
 
         setMessages(prev => [...prev, botMessage]);
@@ -126,24 +178,23 @@ export default function ChatbotWidget() {
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-3 space-y-2 bg-gray-50">
+          <div className="flex-1 overflow-y-auto p-3 space-y-2 bg-gray-50 text-black">
             {messages.map((msg) => (
               <div
                 key={msg.id}
                 className={`flex ${msg.isBot ? 'justify-start' : 'justify-end'}`}
               >
                 <div
-                  className={`max-w-xs px-3 py-2 rounded-lg text-sm ${
-                    msg.isBot
+                  className={`max-w-xs px-3 py-2 rounded-lg text-sm ${msg.isBot
                       ? 'bg-white border border-gray-200'
-                      : 'bg-blue-600 text-white'
-                  }`}
+                      : 'bg-blue-600 text-black'
+                    }`}
                 >
                   <p>{msg.message}</p>
                 </div>
               </div>
             ))}
-            
+
             {isLoading && (
               <div className="flex justify-start">
                 <div className="bg-white border border-gray-200 px-3 py-2 rounded-lg">
@@ -151,12 +202,12 @@ export default function ChatbotWidget() {
                 </div>
               </div>
             )}
-            
+
             <div ref={messagesEndRef} />
           </div>
 
           {/* Input */}
-          <div className="p-3 bg-white border-t border-gray-200 rounded-b-lg">
+          <div className="p-3 bg-white border-t border-gray-200 rounded-b-lg text-black">
             <div className="flex space-x-2">
               <input
                 type="text"

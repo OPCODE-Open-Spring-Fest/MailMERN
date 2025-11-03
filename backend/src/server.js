@@ -12,7 +12,9 @@ const contactRoutes = require('./routes/contactRoutes');
 const app = express();
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
@@ -23,8 +25,9 @@ app.use('/api/users', userRoutes);
 app.use('/api/chatbot', chatbotRoutes);
 app.use('/api/auth', userRoutes);
 app.use('/api/emails', emailRoutes);
-app.use('/api/track', trackRoutes);
-app.use('/api/contacts',contactRoutes);
+app.use('/api/contacts',contactRoutes); 
+app.use("/api/google-calendar", googleRoutes);
+app.use('/api/track', trackRoutes); 
 
 const PORT = process.env.PORT || 5000;
 
