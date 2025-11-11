@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-
+import { Mail } from "lucide-react";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
@@ -23,14 +23,15 @@ export default function Navbar() {
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
-      className="w-full sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200"
+      className="w-full sticky top-0 z-50 bg-gray-300 backdrop-blur-md border-b border-gray-200"
     >
       <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
         <Link
           to="/"
-          className="text-2xl font-semibold text-slate-800 tracking-tight"
+          className="flex gap-4 text-2xl font-semibold text-slate-800 tracking-tight"
         >
+          <Mail className="w-8 h-8 text-gray-500" />
           MailMERN
         </Link>
 
