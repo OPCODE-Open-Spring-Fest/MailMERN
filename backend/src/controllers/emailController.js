@@ -3,6 +3,9 @@ const { sendEmail } = require('../utils/SendEmail');
 const logger = require('../utils/logger');
 const mongoose = require('mongoose');
 const EmailEvent = require('../models/EmailEvent');
+const { sendBulkEmails, getCampaignStatus, getUserCampaigns } = require('../services/bulkEmailService');
+const csvParser = require('csv-parser');
+const { Readable } = require('stream');
 
 // POST /api/emails/send
 // Body: { to, subject, text, html, from }
@@ -156,6 +159,155 @@ exports.testEthereal = async (req, res) => {
     });
   } catch (error) {
     logger.error('Error in ethereal test controller:', error && (error.stack || error));
+    return res.status(500).json({
+      success: false,
+      error: error && (error.message || error)
+    });
+  }
+};
+
+// POST /api/emails/bulk-send
+exports.bulkSend = async (req, res) => {
+  try {
+    const { name, subject, html, text } = req.body;
+    let recipients = [];
+
+    if (req.file && req.file.buffer) {
+      recipients = await parseCSVFile(req.file.buffer);
+    } else if (req.body.recipients) {
+      try {
+        recipients = typeof req.body.recipients === 'string' 
+          ? JSON.parse(req.body.recipients) 
+          : req.body.recipients;
+      } catch (e) {
+        return res.status(400).json({ 
+          success: false, 
+          error: 'Invalid recipients format. Expected JSON array or CSV file.' 
+        });
+      }
+    } else {
+      return res.status(400).json({ 
+        success: false, 
+        error: 'Either CSV file or recipients array is required' 
+      });
+    }
+
+    if (!name || !subject) {
+      return res.status(400).json({ 
+        success: false, 
+        error: 'Campaign name and subject are required' 
+      });
+    }
+    if (!html && !text) {
+      return res.status(400).json({ 
+        success: false, 
+        error: 'Either HTML or text content is required' 
+      });
+    }
+    if (!recipients || recipients.length === 0) {
+      return res.status(400).json({ 
+        success: false, 
+        error: 'No valid recipients found in CSV or recipients array' 
+      });
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const validRecipients = recipients.filter(r => {
+      if (!r.email || !emailRegex.test(r.email)) {
+        logger.warn(`Invalid email address: ${r.email}`);
+        return false;
+      }
+      return true;
+    });
+    if (validRecipients.length === 0) {
+      return res.status(400).json({ 
+        success: false, 
+        error: 'No valid email addresses found' 
+      });
+    }
+
+    const userId = req.user?.id || null;
+
+    // Send bulk emails
+    const result = await sendBulkEmails(
+      { name, subject, html, text, userId },
+      validRecipients
+    );
+    return res.status(200).json({
+      success: true,
+      ...result
+    });
+
+  } catch (error) {
+    logger.error('Error in bulk send controller:', error && (error.stack || error));
+    return res.status(500).json({
+      success: false,
+      error: error && (error.message || error)
+    });
+  }
+};
+
+//function to parse CSV
+const parseCSVFile = (buffer) => {
+  return new Promise((resolve, reject) => {
+    const rows = [];
+    const stream = Readable.from(buffer.toString());
+    
+    stream
+      .pipe(csvParser({ 
+        skipLines: 0, 
+        mapHeaders: ({ header }) => header && header.trim().toLowerCase() 
+      }))
+      .on('data', (row) => {
+        const email = (row.email || row['e-mail'] || row['email address'] || '').toString().trim().toLowerCase();
+        const name = (row.name || row['full name'] || row['fullname'] || row['first name'] || '').toString().trim();
+        
+        if (email) {
+          rows.push({ email, name });
+        }
+      })
+      .on('end', () => {
+        resolve(rows);
+      })
+      .on('error', (err) => {
+        reject(err);
+      });
+  });
+};
+
+// GET /api/emails/campaign/:id
+exports.getCampaign = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const campaign = await getCampaignStatus(id);
+    
+    return res.status(200).json({
+      success: true,
+      campaign
+    });
+  } catch (error) {
+    logger.error('Error getting campaign:', error && (error.stack || error));
+    return res.status(500).json({
+      success: false,
+      error: error && (error.message || error)
+    });
+  }
+};
+
+// GET /api/emails/campaigns
+exports.getCampaigns = async (req, res) => {
+  try {
+    const page = Math.max(1, parseInt(req.query.page, 10) || 1);
+    const limit = Math.max(1, parseInt(req.query.limit, 10) || 20);
+    const userId = req.user?.id || null;
+    
+    const result = await getUserCampaigns(userId, page, limit);
+    
+    return res.status(200).json({
+      success: true,
+      ...result
+    });
+  } catch (error) {
+    logger.error('Error getting campaigns:', error && (error.stack || error));
     return res.status(500).json({
       success: false,
       error: error && (error.message || error)

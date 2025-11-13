@@ -11,6 +11,7 @@ export default function Navbar() {
     { name: "Home", path: "/" },
     { name: "Dashboard", path: "/dashboard" },
     { name: "Chatbot", path: "/chatbot" },
+    { name: "Bulk Email", path: "/bulk-email" },
     { name: "Login", path: "/login" },
     { name: "Register", path: "/register" },
     { name:"Email Builder", path:"/builder"},
