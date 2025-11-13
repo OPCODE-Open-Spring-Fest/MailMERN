@@ -1,14 +1,31 @@
 // controllers/googleController.js
-const { google } = require("googleapis");
+let google;
+try {
+  google = require("googleapis").google;
+} catch (error) {
+  console.warn('  googleapis package not found. Google Calendar features will be disabled.');
+  google = null;
+}
 const { DateTime } = require("luxon");
 
-const oauth2Client = new google.auth.OAuth2(
-  process.env.GOOGLE_CLIENT_ID,
-  process.env.GOOGLE_CLIENT_SECRET,
-  "http://localhost:5001/api/google-calendar/oauth2callback"
-);
+let oauth2Client;
+if (google) {
+  oauth2Client = new google.auth.OAuth2(
+    process.env.GOOGLE_CLIENT_ID,
+    process.env.GOOGLE_CLIENT_SECRET,
+    "http://localhost:5001/api/google-calendar/oauth2callback"
+  );
+} else {
+  oauth2Client = null;
+}
 
 exports.getAuthUrl = (req, res) => {
+  if (!google || !oauth2Client) {
+    return res.status(503).json({
+      success: false,
+      error: "Google Calendar feature is not available. Please install googleapis package: npm install googleapis"
+    });
+  }
   const url = oauth2Client.generateAuthUrl({
     access_type: "offline",
     scope: ["https://www.googleapis.com/auth/calendar.events"],
@@ -17,6 +34,9 @@ exports.getAuthUrl = (req, res) => {
 };
 
 exports.oauthCallback = async (req, res) => {
+  if (!google || !oauth2Client) {
+    return res.status(503).send("Google Calendar feature is not available. Please install googleapis package.");
+  }
   try {
     const { code } = req.query;
     const { tokens } = await oauth2Client.getToken(code);
@@ -29,10 +49,16 @@ exports.oauthCallback = async (req, res) => {
 };
 
 exports.scheduleMeeting = async (req, res) => {
+  if (!google || !oauth2Client) {
+    return res.status(503).json({
+      success: false,
+      error: "Google Calendar feature is not available. Please install googleapis package: npm install googleapis"
+    });
+  }
   try {
     const { title, date, time, duration = 30 } = req.body;
 
-    if (!oauth2Client.credentials.access_token) {
+    if (!oauth2Client.credentials || !oauth2Client.credentials.access_token) {
       return res
         .status(401)
         .json({ success: false, message: "Google Calendar not connected" });

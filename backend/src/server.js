@@ -10,6 +10,7 @@ const googleRoutes = require('./routes/googleRoute');
 const trackRoutes = require('./routes/trackRoutes');
 const { configDotenv } = require('dotenv');
 const contactRoutes = require('./routes/contactRoutes');
+const googleRoutes = require('./routes/googleRoute');
 const app = express();
 app.use(
   cors({
