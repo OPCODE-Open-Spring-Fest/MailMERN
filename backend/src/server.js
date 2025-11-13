@@ -6,6 +6,7 @@ const userRoutes = require('./routes/userRoutes');
 const { errorMiddleware } = require('./middlewares/errorMiddleware');
 const chatbotRoutes = require('./routes/chatbotRoutes');
 const emailRoutes = require('./routes/emailRoutes');
+const googleRoutes = require('./routes/googleRoute');
 const trackRoutes = require('./routes/trackRoutes');
 const { configDotenv } = require('dotenv');
 const contactRoutes = require('./routes/contactRoutes');

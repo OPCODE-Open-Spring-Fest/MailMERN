@@ -99,6 +99,71 @@ MailMERN/
 git clone https://github.com/OPCODE-Open-Spring-Fest/MailMERN.git
 cd MailMERN
 ```
+
+## 🐳 Run with Docker (Recommended for Development & Testing)
+
+You can now easily run the entire **MailMERN** stack (Frontend + Backend + MongoDB) using **Docker Compose** — no manual setup needed!
+
+---
+
+### 1️⃣ Prerequisites
+Make sure you have these installed:
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+
+---
+
+### 2️⃣ Setup Environment Variables
+Create a `.env` file inside the `backend/` folder (if not already present):
+
+```env
+PORT=5000
+MONGO_URI=mongodb://mongo:27017/mailmern
+EMAIL_USER=your_email@example.com
+EMAIL_PASS=your_app_password
+OPENAI_API_KEY=your_openai_key
+
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_SECURE=false # true for 465, false for 587
+SMTP_USER=your_email@example.com
+SMTP_PASS=your_app_password
+EMAIL_FROM="MailMERN no-reply@example.com"
+EMAIL_TEST_TO=receiver@example.com
+NODE_ENV=development
+```
+
+### 3️⃣ Start the Containers
+
+From the project root, run:
+
+```bash
+docker-compose up --build
+```
+
+This will:
+
+🧩 Start the MongoDB container
+
+⚙️ Run the Express backend on port 5000
+
+💻 Serve the React frontend on port 5173
+
+Once started:
+
+Frontend: http://localhost:5173
+
+Backend API: http://localhost:5000/api
+
+### 4️⃣ Stopping Containers
+
+To stop and remove all running containers, use:
+
+```bash
+docker-compose down
+```
+---
+## Individual Setup 
 2️⃣ Backend Setup
 ```bash
 cd backend
@@ -112,6 +177,7 @@ EMAIL_USER=your_email@example.com
 EMAIL_PASS=your_app_password
 OPENAI_API_KEY=your_openai_key
 ```
+
 Run the backend:
 ```bash
 npm run dev
