@@ -1,23 +1,37 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Menu, X, LogOut } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail } from "lucide-react";
+import { useAuth } from "../context/AuthContext";
+import toast from "react-hot-toast";
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const { isAuthenticated, user, logout } = useAuth();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    logout();
+    toast.success("Logged out successfully");
+    navigate("/");
+  };
+  const publicLinks = [
+    { name: "Home", path: "/" },
+    { name: "Login", path: "/login" },
+    { name: "Register", path: "/register" },
+  ];
 
-  const links = [
+  const authenticatedLinks = [
     { name: "Home", path: "/" },
     { name: "Dashboard", path: "/dashboard" },
     { name: "Chatbot", path: "/chatbot" },
     { name: "Bulk Email", path: "/bulk-email" },
-    { name: "Login", path: "/login" },
-    { name: "Register", path: "/register" },
-    { name:"Email Builder", path:"/builder"},
-    {name:"Contacts", path:"/contacts"}
+    { name: "Email Builder", path: "/builder" },
+    { name: "Contacts", path: "/contacts" },
   ];
 
+  const links = isAuthenticated ? authenticatedLinks : publicLinks;
   return (
  
     <motion.nav
@@ -37,7 +51,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex space-x-8">
+        <div className="hidden md:flex items-center space-x-8">
           {links.map((link) => (
             <Link
               key={link.path}
@@ -51,6 +65,18 @@ export default function Navbar() {
               {link.name}
             </Link>
           ))}
+          {isAuthenticated && (
+            <>
+              <span className="text-sm text-slate-600">{user?.name || user?.email}</span>
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-2 text-sm font-medium text-red-600 hover:text-red-700 transition-all duration-200"
+              >
+                <LogOut size={16} />
+                Logout
+              </button>
+            </>
+          )}
         </div>
 
         {/* Mobile Toggle */}
@@ -88,6 +114,21 @@ export default function Navbar() {
                   {link.name}
                 </Link>
               ))}
+              {isAuthenticated && (
+                <>
+                  <div className="text-sm text-slate-600 py-2 px-2">{user?.name || user?.email}</div>
+                  <button
+                    onClick={() => {
+                      handleLogout();
+                      setIsOpen(false);
+                    }}
+                    className="flex items-center gap-2 text-base font-medium text-red-600 hover:text-red-700 py-2 rounded-md transition-all"
+                  >
+                    <LogOut size={18} />
+                    Logout
+                  </button>
+                </>
+              )}
             </div>
           </motion.div>
         )}

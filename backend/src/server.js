@@ -6,12 +6,16 @@ const userRoutes = require('./routes/userRoutes');
 const { errorMiddleware } = require('./middlewares/errorMiddleware');
 const chatbotRoutes = require('./routes/chatbotRoutes');
 const emailRoutes = require('./routes/emailRoutes');
-const googleRoutes = require('./routes/googleRoute');
 const trackRoutes = require('./routes/trackRoutes');
-const { configDotenv } = require('dotenv');
 const contactRoutes = require('./routes/contactRoutes');
 const googleRoutes = require('./routes/googleRoute');
 const app = express();
+
+if (!process.env.JWT_SECRET) {
+  process.env.JWT_SECRET = 'mailmern-dev-secret-key-change-in-production-' + Date.now();
+  console.warn('WARNING: JWT_SECRET not found in environment variables. Using default development secret.');
+  console.warn('Please set JWT_SECRET in your .env file for production use!');
+}
 app.use(
   cors({
     origin: ["http://localhost:5173"],
@@ -31,12 +35,13 @@ app.use('/api/contacts',contactRoutes);
 app.use("/api/google-calendar", googleRoutes);
 app.use('/api/track', trackRoutes); 
 
-const PORT = process.env.PORT || 5000;
-
+// 404 handler
 app.use('*', (req, res) => {
   res.status(404).json({ success: false, message: 'Route not found' });
 });
 
+app.use(errorMiddleware);
+const PORT = process.env.PORT || 5000;
 const start = async () => {
   try {
     await connectDB();
@@ -47,5 +52,4 @@ const start = async () => {
 };
 
 start();
-app.use(errorMiddleware);
 module.exports = app;

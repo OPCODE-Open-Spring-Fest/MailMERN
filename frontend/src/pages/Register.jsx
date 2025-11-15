@@ -1,9 +1,11 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import { registerUser } from "../services/authService";
+import toast from "react-hot-toast";
+import { useAuth } from "../context/AuthContext";
 
 const Register = () => {
   const [fullname, setFullname] = useState("");
@@ -13,6 +15,19 @@ const Register = () => {
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { isAuthenticated, loading: authLoading } = useAuth();
+  useEffect(() => {
+    if (!authLoading && isAuthenticated) {
+      navigate("/dashboard");
+    }
+  }, [isAuthenticated, authLoading, navigate]);
+  if (authLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-900">
+        <ClipLoader size={50} color="#06b6d4" />
+      </div>
+    );
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,14 +36,25 @@ const Register = () => {
       setErr("All fields are required");
       return;
     }
+    if (password.length < 6) {
+      setErr("Password must be at least 6 characters");
+      return;
+    }
     setLoading(true);
 
     try {
-      await registerUser({ fullname, email, password });
+      const result = await registerUser({ fullname, email, password });
+      if (result.success || result.data) {
+        toast.success("Registration successful! Please login.");
+        navigate("/login");
+      } else {
+        setErr(result.message || "Registration failed. Please try again.");
+      }
       setLoading(false);
-      navigate("/login");
     } catch (error) {
-      setErr(error?.response?.data?.message || error.message || "Registration failed.");
+      const errorMessage = error?.response?.data?.message || error?.response?.data?.error || error.message || "Registration failed.";
+      setErr(errorMessage);
+      toast.error(errorMessage);
       setLoading(false);
     }
   };
