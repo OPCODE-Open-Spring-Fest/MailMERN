@@ -15,7 +15,8 @@ import TemplateBuilder from "./pages/Campaign";
 import { AuthProvider } from "./context/AuthContext";
 import ForgotPassword from "./pages/Forgotpassword";
 import Contacts from "./pages/Contact";
-import BulkEmail from "./pages/BulkEmail"; 
+import BulkEmail from "./pages/BulkEmail";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
   return (
@@ -27,14 +28,50 @@ export default function App() {
 
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/chatbot" element={<Chatbot />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/builder" element={<TemplateBuilder />} />
-           <Route path='/forgot-password' element={<ForgotPassword/>}/>
-            <Route path='/contacts' element={<Contacts/>}/>
-            <Route path='/bulk-email' element={<BulkEmail/>}/>
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            {/* Protected Routes */}
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/chatbot"
+              element={
+                <ProtectedRoute>
+                  <Chatbot />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/builder"
+              element={
+                <ProtectedRoute>
+                  <TemplateBuilder />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/contacts"
+              element={
+                <ProtectedRoute>
+                  <Contacts />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/bulk-email"
+              element={
+                <ProtectedRoute>
+                  <BulkEmail />
+                </ProtectedRoute>
+              }
+            />     
             <Route path="*" element={<NotFound />} />
           </Routes> 
           

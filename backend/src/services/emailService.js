@@ -3,11 +3,11 @@ const EmailLog = require('../models/EmailLog'); // import your model
 
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST || 'smtp.gmail.com',
-  port: process.env.SMTP_PORT || 465,
-  secure: true, 
+  port: parseInt(process.env.SMTP_PORT || '587'),
+  secure: process.env.SMTP_SECURE === 'true' || false,
   auth: {
-    user: process.env.EMAIL,
-    pass: process.env.PASS,
+    user: process.env.SMTP_USER || process.env.EMAIL_USER || process.env.EMAIL,
+    pass: process.env.SMTP_PASS || process.env.EMAIL_PASS || process.env.PASS,
   },
 });
 

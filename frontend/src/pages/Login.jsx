@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import { loginUser } from "../services/authService";
+import { useAuth } from "../context/AuthContext";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -11,6 +13,19 @@ const Login = () => {
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { login, isAuthenticated, loading: authLoading } = useAuth();
+  useEffect(() => {
+    if (!authLoading && isAuthenticated) {
+      navigate("/dashboard");
+    }
+  }, [isAuthenticated, authLoading, navigate]);
+  if (authLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-900">
+        <ClipLoader size={50} color="#06b6d4" />
+      </div>
+    );
+  }
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -18,11 +33,18 @@ const Login = () => {
     setLoading(true);
     try {
       const result = await loginUser({ email, password });
-      console.log(result.data);
+      if (result.success && result.token && result.user) {
+        login(result.token, result.user);
+        toast.success("Login successful!");
+        navigate("/dashboard");
+      } else {
+        setErr(result.message || "Login failed. Please try again.");
+      }
       setLoading(false);
-      navigate("/"); // Redirect on success
     } catch (error) {
-      setErr(error?.response?.data?.message || error.message || "Login failed.");
+      const errorMessage = error?.response?.data?.message || error?.response?.data?.error || error.message || "Login failed.";
+      setErr(errorMessage);
+      toast.error(errorMessage);
       setLoading(false);
     }
   };
